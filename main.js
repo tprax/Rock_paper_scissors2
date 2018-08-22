@@ -7,6 +7,7 @@ var computer
 var results
 var userChoice
 var winner
+var count
 
 
 //functions
@@ -15,6 +16,9 @@ var winner
 //compare choices
 //display winner
 //add wins to user,computer, or ties
+function computerChoice(){
+  return options[Math.floor(Math.random() * options.length)]
+}
 
 $('#rock').on('click',function(){
   userChoice = 'rock'
@@ -29,40 +33,32 @@ $('#scissors').on('click',function(){
   compare(userChoice)
 })
 
-function computerChoice(){
-  return options[Math.floor(Math.random() * options.length)]
-}
 
 function compare(userChoice){
   computer = computerChoice()
-  debugger
+
   if (userChoice === computer)
-  return 'tie'
+  results = 'tie'
+  $('#winner').text('You ' + results)
+  
   switch (userChoice){
     case 'rock':
-      return computer === 'paper' ? 'lose' : 'win'
+      results = computer === 'paper' ? 'lose' : 'win'
+      $('#winner').text('You ' + results)
     case 'paper':
-      return computer === 'scissors' ? 'lose' : 'win'
+      results =computer === 'scissors' ? 'lose' : 'win'
+      $('#winner').text('You ' + results)
     case 'scissors':
-      return computer === 'rock' ? 'lose' : 'win'
+      results = computer === 'rock' ? 'lose' : 'win'
+      $('#winner').text('You ' + results)
     default:
       return
-    
-  }
+  } 
 }
+// if (results === 'win'){
+// $('#userwins').text('User wins: ' + 1)
+// }
 
-function winner(){
-  if(compare() === 'win'){
-    winner = "You Win!"
-  }
-  if(compare() === 'lose'){
-    winner = "You Lose!"
-  }
-  if(compare() === 'tie'){
-    winner = "It is a tie!"
-  }
-  $('#winner').text(winner)
-}
 
 
 
